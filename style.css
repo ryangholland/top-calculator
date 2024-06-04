@@ -5,3 +5,76 @@
   margin: 0;
   padding: 0;
 }
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+button {
+  font-size: inherit;
+  border-radius: 10px;
+  outline: 1px black;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+.calculator {
+  border: solid 1px black;
+  border-radius: 10px;
+  padding: 1.25rem;
+  background-color: rgb(172, 172, 172);
+}
+
+.calculator > * + * {
+  margin-top: 0.75rem;
+}
+
+.display {
+  padding: 1rem;
+  background-color: white;
+  border: solid 1px black;
+  border-radius: 10px;
+  margin-bottom: 1.25rem;
+}
+
+.display * {
+  text-align: right;
+}
+
+.display-bottom {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.row,
+.top-row {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.top-row button {
+  padding: 1rem;
+  width: 50%;
+}
+
+.clear-btn {
+  background-color: rgb(255, 173, 173);
+}
+
+.del-btn {
+  background-color: rgb(164, 197, 247);
+}
+
+.row button {
+  padding: 1rem;
+  width: 75px;
+}
