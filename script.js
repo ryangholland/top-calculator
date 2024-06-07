@@ -53,9 +53,17 @@ numButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    num1 = input;
-    input = "";
-    operator = e.target.innerText;
+    if (num1 == null) {
+      num1 = input;
+      input = "";
+      operator = e.target.innerText;
+    } else {
+      num2 = input;
+      input = "";
+      displayBottom.innerText = operate(operator, +num1, +num2);
+      num1 = operate(operator, +num1, +num2);
+      operator = e.target.innerText;
+    }
   });
 });
 
