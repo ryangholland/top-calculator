@@ -40,7 +40,31 @@ function operate(operator, num1, num2) {
 }
 
 function updateDisplay(numToDisplay) {
-  displayBottom.innerText = numToDisplay;
+  let numStr = numToDisplay.toString();
+  let decimalIndex = numStr.indexOf(".");
+  if (numStr.length >= 20 && decimalIndex >= 0) {
+    numStr = truncateNum(numStr, decimalIndex);
+  }
+  displayBottom.innerText = numStr;
+}
+
+function truncateNum(numStr, decimalIndex) {
+  // Calculate how many characters to keep after the decimal point
+  let integerPart = numStr.slice(0, decimalIndex + 1); // Including the decimal point
+  let fractionalPart = numStr.slice(decimalIndex + 1);
+
+  // Truncate the fractional part to fit within the 20 character limit
+  let maxFractionalLength = 20 - integerPart.length;
+
+  // If the integer part and decimal point take up too much space, truncate accordingly
+  if (maxFractionalLength <= 0) {
+    return integerPart.slice(0, 20);
+  }
+
+  // Truncate the fractional part and concatenate it with the integer part
+  let truncatedFractionalPart = fractionalPart.slice(0, maxFractionalLength);
+
+  return integerPart + truncatedFractionalPart;
 }
 
 numButtons.forEach((button) => {
@@ -77,9 +101,9 @@ equalButton.addEventListener("click", () => {
     input === "" ? (num2 = num1) : (num2 = input);
     num1 = operate(operator, +num1, +num2);
     updateDisplay(num1);
-    num2 = null
+    num2 = null;
     operator = null;
-    input = "";    
+    input = "";
   }
 });
 
@@ -90,3 +114,12 @@ clearButton.addEventListener("click", () => {
   operator = null;
   displayBottom.innerText = 0;
 });
+
+// To Do:
+// 1. Round decimals to not overflow screen X
+
+// 2. Divide by zero error message
+// 3. Decimal button
+// 4. Delete button
+// 5. Keyboard support
+// 6. Upper Display
