@@ -74,9 +74,12 @@ operatorButtons.forEach((button) => {
 
 equalButton.addEventListener("click", () => {
   if (num1 && operator) {
-    num2 = input;
-    displayBottom.innerText = operate(operator, +num1, +num2);
+    input === "" ? (num2 = num1) : (num2 = input);
     num1 = operate(operator, +num1, +num2);
+    updateDisplay(num1);
+    num2 = null
+    operator = null;
+    input = "";    
   }
 });
 
