@@ -5,6 +5,7 @@ const clearButton = document.querySelector(".clear-btn");
 const displayTop = document.querySelector(".display-top");
 const displayBottom = document.querySelector(".display-bottom");
 
+let input = "";
 let num1 = null;
 let num2 = null;
 let operator = null;
@@ -38,34 +39,36 @@ function operate(operator, num1, num2) {
   }
 }
 
+function updateDisplay() {
+  displayBottom.innerText = input;
+}
+
 numButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    displayBottom.innerText == "0" || num1
-      ? (displayBottom.innerText = e.target.innerText)
-      : (displayBottom.innerText += e.target.innerText);
+    if (input === "" && e.target.innerText === "0") return;
+    input += e.target.innerText;
+    updateDisplay();
   });
 });
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    // behave differently if num1 already exists?
-
-    num1 = displayBottom.innerText;
+    num1 = input;
+    input = "";
     operator = e.target.innerText;
-
-    console.log(num1);
-    console.log(operator);
   });
 });
 
 equalButton.addEventListener("click", () => {
   if (num1 && operator) {
-    num2 = displayBottom.innerText;
+    num2 = input;
     displayBottom.innerText = operate(operator, +num1, +num2);
+    num1 = operate(operator, +num1, +num2);
   }
 });
 
 clearButton.addEventListener("click", () => {
+  input = "";
   num1 = null;
   num2 = null;
   operator = null;
