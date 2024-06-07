@@ -39,30 +39,35 @@ function operate(operator, num1, num2) {
   }
 }
 
-function updateDisplay() {
-  displayBottom.innerText = input;
+function updateDisplay(numToDisplay) {
+  displayBottom.innerText = numToDisplay;
 }
 
 numButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-    if (input === "" && e.target.innerText === "0") return;
+    if (input === "0" && e.target.innerText === "0") return;
     input += e.target.innerText;
-    updateDisplay();
+    updateDisplay(input);
   });
 });
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (num1 == null) {
-      num1 = input;
+      input === "" ? (num1 = "0") : (num1 = input);
       input = "";
       operator = e.target.innerText;
     } else {
-      num2 = input;
-      input = "";
-      displayBottom.innerText = operate(operator, +num1, +num2);
-      num1 = operate(operator, +num1, +num2);
-      operator = e.target.innerText;
+      if (input === "") {
+        operator = e.target.innerText;
+        return;
+      } else {
+        num2 = input;
+        num1 = operate(operator, +num1, +num2);
+        updateDisplay(num1);
+        input = "";
+        operator = e.target.innerText;
+      }
     }
   });
 });
