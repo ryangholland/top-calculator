@@ -1,6 +1,7 @@
 const numButtons = document.querySelectorAll(".num-btn");
 const operatorButtons = document.querySelectorAll(".op-btn");
 const equalButton = document.querySelector(".eq-btn");
+const clearButton = document.querySelector(".clear-btn");
 const displayTop = document.querySelector(".display-top");
 const displayBottom = document.querySelector(".display-bottom");
 
@@ -47,7 +48,6 @@ numButtons.forEach((button) => {
 
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
-
     // behave differently if num1 already exists?
 
     num1 = displayBottom.innerText;
@@ -63,4 +63,11 @@ equalButton.addEventListener("click", () => {
     num2 = displayBottom.innerText;
     displayBottom.innerText = operate(operator, +num1, +num2);
   }
+});
+
+clearButton.addEventListener("click", () => {
+  num1 = null;
+  num2 = null;
+  operator = null;
+  displayBottom.innerText = 0;
 });
