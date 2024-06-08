@@ -2,6 +2,7 @@ const numButtons = document.querySelectorAll(".num-btn");
 const operatorButtons = document.querySelectorAll(".op-btn");
 const equalButton = document.querySelector(".eq-btn");
 const clearButton = document.querySelector(".clear-btn");
+const decimalButton = document.querySelector(".dec-btn");
 const displayTop = document.querySelector(".display-top");
 const displayBottom = document.querySelector(".display-bottom");
 
@@ -24,7 +25,7 @@ function multiply(num1, num2) {
 
 function divide(num1, num2) {
   if (num2 == 0) {
-    return "ERR: DIV BY ZERO"
+    return "ERR: DIV BY ZERO";
   }
   return num1 / num2;
 }
@@ -78,6 +79,12 @@ numButtons.forEach((button) => {
   });
 });
 
+decimalButton.addEventListener("click", () => {
+  if (input.indexOf(".") >= 0) return;
+  input === "" ? (input = "0.") : (input += ".");
+  updateDisplay(input);
+});
+
 operatorButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (num1 == null) {
@@ -120,8 +127,8 @@ clearButton.addEventListener("click", () => {
 
 // To Do:
 // 1. Round decimals to not overflow screen X
-
 // 2. Divide by zero error message
+
 // 3. Decimal button
 // 4. Delete button
 // 5. Keyboard support
