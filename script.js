@@ -76,7 +76,7 @@ function truncateNum(numStr, decimalIndex) {
 numButtons.forEach((button) => {
   button.addEventListener("click", (e) => {
     if (input === "0" && e.target.innerText === "0") return;
-    input += e.target.innerText;
+    input === "0" ? input = e.target.innerText : input += e.target.innerText;
     updateDisplay(input);
   });
 });
@@ -133,10 +133,6 @@ deleteButton.addEventListener("click", () => {
 })
 
 // To Do:
-// 1. Round decimals to not overflow screen X
-// 2. Divide by zero error message
-// 3. Decimal button
 
-// 4. Delete button
 // 5. Keyboard support
 // 6. Upper Display
